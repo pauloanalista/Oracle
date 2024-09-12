@@ -17,6 +17,22 @@ ORDER BY column_id;
 
 ```
 
+####  Listar Colunas Referenciadas e Referentes (Parent e Child Tables)
+```sql
+SELECT c.constraint_name AS foreign_key,
+       c.table_name AS child_table,
+       col.column_name AS child_column,
+       r.table_name AS parent_table,
+       rcol.column_name AS parent_column
+FROM all_constraints c
+JOIN all_cons_columns col ON c.constraint_name = col.constraint_name
+JOIN all_constraints r ON c.r_constraint_name = r.constraint_name
+JOIN all_cons_columns rcol ON r.constraint_name = rcol.constraint_name
+WHERE c.constraint_type = 'R'
+AND c.owner = 'NOME_DO_SCHEMA'
+ORDER BY c.table_name;
+```
+
 
 ####  Achar código em procedures (functions, triggers, packages, etc.)
 ```sql
@@ -101,18 +117,3 @@ ORDER BY a.column_name;
 
 ```
 
-####  Listar Colunas Referenciadas e Referentes (Parent e Child Tables)
-```sql
-SELECT c.constraint_name AS foreign_key,
-       c.table_name AS child_table,
-       col.column_name AS child_column,
-       r.table_name AS parent_table,
-       rcol.column_name AS parent_column
-FROM all_constraints c
-JOIN all_cons_columns col ON c.constraint_name = col.constraint_name
-JOIN all_constraints r ON c.r_constraint_name = r.constraint_name
-JOIN all_cons_columns rcol ON r.constraint_name = rcol.constraint_name
-WHERE c.constraint_type = 'R'
-AND c.owner = 'NOME_DO_SCHEMA'
-ORDER BY c.table_name;
-```
