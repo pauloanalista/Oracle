@@ -141,6 +141,15 @@ FROM all_tab_privs
 WHERE table_name = 'DADOS_PROC_ARREC_EPROC';
 
 ```
+
+Mostra as permissões de objeto concedidas ao usuário atual.
+```sql
+SELECT *
+FROM USER_TAB_PRIVS
+WHERE table_name = 'DADOS_PROC_ARREC_EPROC';
+
+```
+
 Essas consultas mostram:
 
 - grantee: Quem recebeu o privilégio (usuário ou role).
