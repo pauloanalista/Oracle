@@ -117,3 +117,35 @@ ORDER BY a.column_name;
 
 ```
 
+####  Verificar Grants de uma tabela
+Para verificar as permissões (grants) atribuídas a uma tabela no Oracle, como a tabela DADOS_PROC_ARREC_EPROC, você pode consultar as seguintes tabelas de dicionário de dados do Oracle:
+
+DBA_TAB_PRIVS: Mostra as permissões de objeto concedidas a usuários e roles.
+USER_TAB_PRIVS: Mostra as permissões de objeto concedidas ao usuário atual.
+ALL_TAB_PRIVS: Mostra as permissões de objeto que o usuário atual pode consultar (permissões próprias e de outros usuários).
+
+Exemplo de consulta:
+Se você tiver privilégios de DBA e quiser verificar todos os grants relacionados a essa tabela, pode utilizar:
+
+```sql
+SELECT grantee, privilege, grantable
+FROM dba_tab_privs
+WHERE table_name = 'DADOS_PROC_ARREC_EPROC';
+
+```
+Se você não for DBA e estiver interessado nas permissões disponíveis para o seu usuário, pode usar:
+
+```sql
+SELECT grantee, privilege, grantable
+FROM all_tab_privs
+WHERE table_name = 'DADOS_PROC_ARREC_EPROC';
+
+```
+Essas consultas mostram:
+
+- grantee: Quem recebeu o privilégio (usuário ou role).
+- privilege: O tipo de privilégio concedido (SELECT, INSERT, UPDATE, etc.).
+- grantable: Se o privilégio pode ser concedido a outros usuários.
+
+Isso vai te permitir verificar quais permissões estão atribuídas à tabela e quem tem acesso a ela.
+
