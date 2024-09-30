@@ -4,7 +4,9 @@ Querys e rotinas que facilitam nosso dia a dia.
 ```sql
 SELECT  OWNER, TABLE_NAME, COLUMN_NAME, DATA_TYPE 
 FROM ALL_TAB_COLUMNS
-WHERE COLUMN_NAME like  '%EMPENHO%';
+WHERE 
+     UPPER(COLUMN_NAME) like  '%EMPENHO%' 
+  or UPPER(TABLE_NAME) like '%EMPENHO%';
 ```
 
 #### Listar Colunas de uma Tabela Específica
