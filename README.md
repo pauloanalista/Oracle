@@ -35,7 +35,7 @@ AND c.owner = 'NOME_DO_SCHEMA'
 ORDER BY c.table_name;
 ```
 #### Cria Classe C# lendo dados de uma tabela
-```
+```sql
 SELECT 'public class ' || INITCAP(TABLE_NAME) || ' {' AS CLASS_DEF
 FROM USER_TABLES
 WHERE TABLE_NAME = 'MINHA-TABELA'
