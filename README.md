@@ -34,7 +34,28 @@ WHERE c.constraint_type = 'R'
 AND c.owner = 'NOME_DO_SCHEMA'
 ORDER BY c.table_name;
 ```
-
+#### Cria Classe C# lendo dados de uma tabela
+```
+SELECT 'public class ' || INITCAP(TABLE_NAME) || ' {' AS CLASS_DEF
+FROM USER_TABLES
+WHERE TABLE_NAME = 'MINHA-TABELA'
+UNION ALL
+SELECT '    public ' ||
+       CASE DATA_TYPE
+            WHEN 'NUMBER' THEN 'int'
+            WHEN 'VARCHAR2' THEN 'string'
+            WHEN 'CHAR' THEN 'string'
+            WHEN 'DATE' THEN 'DateTime'
+            ELSE 'string'
+       END
+       || ' ' ||
+       INITCAP(COLUMN_NAME) ||
+       ' { get; set; }'
+FROM USER_TAB_COLUMNS
+WHERE TABLE_NAME = 'MINHA-TABELA'
+UNION ALL
+SELECT '}' FROM dual;
+```
 
 ####  Achar código em procedures (functions, triggers, packages, etc.)
 ```sql
