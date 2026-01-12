@@ -173,6 +173,21 @@ WHERE table_name = 'DADOS_PROC_ARREC_EPROC';
 
 ```
 
+Listar Jobs
+```sql
+SELECT
+    job_name,
+    enabled,
+    state,
+    last_start_date,
+    next_run_date,
+    repeat_interval
+FROM user_scheduler_jobs
+ORDER BY job_name;
+
+```
+
+
 Essas consultas mostram:
 
 - grantee: Quem recebeu o privilégio (usuário ou role).
