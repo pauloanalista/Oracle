@@ -64,6 +64,15 @@ FROM all_source
 WHERE UPPER(text) LIKE '%TEXTO_PROCURADO%' AND owner = 'NOME_DO_SCHEMA';
 ```
 
+#### Ver todos schemas que tenho acesso
+```sql
+SELECT DISTINCT
+    OWNER AS SCHEMA_NAME,
+    SYS_CONTEXT('USERENV', 'DB_NAME') AS DATABASE_NAME
+FROM ALL_OBJECTS
+ORDER BY OWNER;
+```
+
 ####  Listar tabelas locadas (locked)
 ```sql
 SELECT s.sid, s.serial#, lo.oracle_username, lo.os_user_name, lo.locked_mode, o.object_name
